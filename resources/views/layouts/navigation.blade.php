@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom my-3">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ route('dashboard') }}">
+            <img src="{{ asset('assets/images/brand-logos/desktop-logo.png') }}" alt="{{ config('app.name') }}"
+                class="desktop-logo" style="height: 1.7rem;">
+        </a>
+
+        <!-- Toggler (hamburger) -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menu -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left Side -->
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <x-nav-link :active="request()->routeIs('dashboard')" :href="route('dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-nav-link>
+                </li>
+            </ul>
+
+            <!-- Right Side -->
+            <ul class="navbar-nav ms-auto">
+                <!-- Dropdown User -->
+                <x-dropdown>
+                    <x-slot name="trigger">
+                        {{ Auth::user()->name }}
+                    </x-slot>
+
+                    <x-slot name="content">
+                        <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Profile') }}
+                        </x-dropdown-link>
+
+                        <!-- Logout -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <x-dropdown-link :href="route('logout')"
+                                onclick="event.preventDefault(); this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
+                    </x-slot>
+                </x-dropdown>
+            </ul>
+        </div>
+    </div>
+</nav>

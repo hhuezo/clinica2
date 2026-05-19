@@ -1,0 +1,29 @@
+/**
+ * Estilos custom para tablas DataTables / .table-responsive
+ * Scroll horizontal más visible en todas las tablas
+ */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+}
+.table-responsive::-webkit-scrollbar {
+    height: 14px;
+}
+.table-responsive::-webkit-scrollbar-track {
+    background: #e9ecef;
+    border-radius: 7px;
+}
+.table-responsive::-webkit-scrollbar-thumb {
+    background: #6c757d;
+    border-radius: 7px;
+}
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #495057;
+}
+@supports (scrollbar-width: auto) {
+    .table-responsive {
+        scrollbar-width: auto;
+        scrollbar-color: #6c757d #e9ecef;
+    }
+}
