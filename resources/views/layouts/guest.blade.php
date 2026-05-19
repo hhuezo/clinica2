@@ -3,7 +3,10 @@
     data-header-styles="light" data-menu-styles="dark">
 
 <head>
-    @include('layouts.partials.xintra-head', ['authPage' => true, 'title' => $title ?? config('app.name')])
+    @include('layouts.partials.xintra-head', [
+        'authPage' => true,
+        'title' => isset($heading) ? config('app.name').' — '.$heading : config('app.name'),
+    ])
 </head>
 
 <body class="authentication authentication-basic authentication-background">

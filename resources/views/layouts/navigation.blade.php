@@ -1,8 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom my-3">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ route('dashboard') }}">
-            <img src="{{ asset('assets/images/brand-logos/desktop-logo.png') }}" alt="{{ config('app.name') }}"
-                class="desktop-logo" style="height: 1.7rem;">
+        <a class="navbar-brand fw-semibold text-primary" href="{{ route('dashboard') }}">
+            {{ config('app.name') }}
         </a>
 
         <!-- Toggler (hamburger) -->

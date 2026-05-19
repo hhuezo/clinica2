@@ -1,4 +1,3 @@
-<a href="{{ url('/') }}" class="authentication-brand">
-    <img src="{{ asset('assets/images/brand-logos/desktop-logo.png') }}" alt="{{ config('app.name') }}" class="desktop-logo">
-    <img src="{{ asset('assets/images/brand-logos/desktop-white.png') }}" alt="{{ config('app.name') }}" class="desktop-white">
+<a href="{{ url('/') }}" class="authentication-brand text-decoration-none d-inline-block">
+    <span class="fs-20 fw-bold text-primary d-block lh-sm">{{ config('app.name') }}</span>
 </a>

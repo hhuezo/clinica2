@@ -3,7 +3,10 @@
     data-header-styles="light" data-menu-styles="dark">
 
 <head>
-    @include('layouts.partials.xintra-head', ['authPage' => false, 'title' => $title ?? config('app.name')])
+    @include('layouts.partials.xintra-head', [
+        'authPage' => false,
+        'title' => isset($header) ? config('app.name').' — Panel' : config('app.name'),
+    ])
 </head>
 
 <body>
