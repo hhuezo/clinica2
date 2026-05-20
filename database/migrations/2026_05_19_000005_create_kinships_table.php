@@ -8,17 +8,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('kinships', function (Blueprint $table) {
+        Schema::create('parentescos', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('code', 30)->unique();
-            $table->boolean('is_active')->default(true);
+            $table->string('nombre');
+            $table->string('codigo', 30)->unique();
+            $table->boolean('activo')->default(true);
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('kinships');
+        Schema::dropIfExists('parentescos');
     }
 };

@@ -8,20 +8,20 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('districts', function (Blueprint $table) {
+        Schema::create('distritos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('department_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
-            $table->string('code', 10)->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->foreignId('departamento_id')->constrained('departamentos')->cascadeOnDelete();
+            $table->string('nombre');
+            $table->string('codigo', 10)->nullable();
+            $table->boolean('activo')->default(true);
             $table->timestamps();
 
-            $table->unique(['department_id', 'name']);
+            $table->unique(['departamento_id', 'nombre']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('districts');
+        Schema::dropIfExists('distritos');
     }
 };

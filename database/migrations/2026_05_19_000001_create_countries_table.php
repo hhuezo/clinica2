@@ -8,18 +8,18 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('countries', function (Blueprint $table) {
+        Schema::create('paises', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('iso_code', 3)->unique();
-            $table->string('phone_code', 10)->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->string('nombre');
+            $table->string('codigo_iso', 3)->unique();
+            $table->string('codigo_telefono', 10)->nullable();
+            $table->boolean('activo')->default(true);
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('countries');
+        Schema::dropIfExists('paises');
     }
 };

@@ -8,20 +8,20 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('document_types', function (Blueprint $table) {
+        Schema::create('tipos_documento', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('code', 20)->unique();
-            $table->string('pattern')->nullable()->comment('Regex de validación opcional');
-            $table->boolean('for_adults')->default(true);
-            $table->boolean('for_minors')->default(false);
-            $table->boolean('is_active')->default(true);
+            $table->string('nombre');
+            $table->string('codigo', 20)->unique();
+            $table->string('patron')->nullable()->comment('Regex de validación opcional');
+            $table->boolean('para_adultos')->default(true);
+            $table->boolean('para_menores')->default(false);
+            $table->boolean('activo')->default(true);
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('document_types');
+        Schema::dropIfExists('tipos_documento');
     }
 };

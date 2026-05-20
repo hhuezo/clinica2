@@ -33,12 +33,16 @@ Cree la base de datos `clinica` en phpMyAdmin y ejecute:
 php artisan migrate --seed
 ```
 
-## Usuario administrador por defecto
+## Usuarios de demostración (contraseña: `password`)
 
-| Campo    | Valor                 |
-|----------|-----------------------|
-| Email    | admin@clinica.local   |
-| Password | password              |
+| Rol | Email |
+|-----|-------|
+| admin | admin@clinica.local |
+| admin_clinica | admin.clinica@saludtotal.sv |
+| usuario_clinica | usuario.clinica@saludtotal.sv |
+| admin_sucursal | admin.sucursal@saludtotal.sv |
+
+Datos de organización: empresa **Salud Total SV**, clínica **Clínica Salud Total**, sucursales **Centro** y **Santa Tecla**.
 
 ## Paquetes instalados
 
@@ -47,7 +51,7 @@ php artisan migrate --seed
 | `laravel/socialite` | Login con Google, Facebook, GitHub |
 | `barryvdh/laravel-dompdf` | PDF (recetas, reportes) |
 | `maatwebsite/excel` | Exportar pacientes/citas a Excel |
-| `spatie/laravel-permission` | Roles y permisos |
+| `spatie/laravel-permission` | Roles y permisos (`App\Models\Seguridad\Rol`, `Permiso`) |
 
 ## Login social
 
@@ -55,14 +59,32 @@ php artisan migrate --seed
 2. Complete las variables `GOOGLE_*`, `FACEBOOK_*` en `.env`.
 3. URLs de callback: `{APP_URL}/auth/google/callback`, etc.
 
-## API de catálogos (públicos)
+## Arquitectura
 
-- `GET /api/catalog/countries`
-- `GET /api/catalog/departments?country_id=1`
-- `GET /api/catalog/districts?department_id=1`
-- `GET /api/catalog/document-types?for_adults=1`
-- `GET /api/catalog/document-types?for_minors=1`
-- `GET /api/catalog/kinships`
+Proyecto **monolito Laravel**: rutas en `routes/web.php`, vistas Blade, autenticación con Breeze. La lógica de dominio vive en modelos (`app/Models`) y servicios (`app/Services`); los controladores web se irán agregando junto con las vistas.
+
+## Roles y permisos
+
+Estructura de modelos:
+
+| Carpeta | Modelos |
+|---------|---------|
+| `App\Models\Seguridad` | `User`, `Role`, `Permission` |
+| `App\Models\Catalogo` | `Pais`, `Departamento`, `Distrito`, `TipoDocumento`, `Parentesco` |
+| `App\Models` | `Empresa`, `Clinica`, `Sucursal`, `Paciente`, `Cita`, `Medico`, etc. |
+
+Spatie usa tablas sin cambiar: `roles`, `permissions`, etc.
+
+Roles por defecto: `admin`, `admin_clinica`, `usuario_clinica`, `admin_sucursal`. Permisos con notación `recurso.accion` (ej. `pacientes.crear`, `citas.ver`).
+
+En rutas o controladores:
+
+```php
+Route::get('/pacientes', ...)->middleware('permission:pacientes.ver');
+Route::get('/admin', ...)->middleware('role:admin');
+```
+
+En Blade: `@can('pacientes.crear')` o `@role('administrador')`.
 
 ## Reglas de pacientes (El Salvador)
 
@@ -71,6 +93,6 @@ php artisan migrate --seed
 
 ## Próximos pasos sugeridos
 
-- Instalar Laravel Breeze o Filament para panel administrativo
-- Vistas Blade/Livewire para agenda y expedientes
+- Controladores y rutas web para pacientes, citas y clínicas (vistas Blade)
+- Panel administrativo (Breeze ya instalado o Filament)
 - `php artisan vendor:publish --provider="Barryvdh\DomPDF\ServiceProvider"`

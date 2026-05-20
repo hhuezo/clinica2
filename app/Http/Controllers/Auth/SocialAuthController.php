@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Seguridad\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -30,8 +30,8 @@ class SocialAuthController extends Controller
 
         $user = User::updateOrCreate(
             [
-                'provider' => $provider,
-                'provider_id' => $socialUser->getId(),
+                'proveedor' => $provider,
+                'proveedor_id' => $socialUser->getId(),
             ],
             [
                 'name' => $socialUser->getName() ?? $socialUser->getNickname() ?? 'Usuario',
@@ -39,7 +39,7 @@ class SocialAuthController extends Controller
                 'avatar' => $socialUser->getAvatar(),
                 'email_verified_at' => now(),
                 'password' => Hash::make(Str::random(32)),
-                'is_active' => true,
+                'activo' => true,
             ]
         );
 

@@ -8,25 +8,25 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('clinics', function (Blueprint $table) {
+        Schema::create('clinicas', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('legal_name')->nullable();
+            $table->string('nombre');
+            $table->string('razon_social')->nullable();
             $table->string('nit', 20)->nullable();
-            $table->string('phone', 30)->nullable();
-            $table->string('email')->nullable();
-            $table->string('website')->nullable();
-            $table->string('logo_path')->nullable();
-            $table->text('address')->nullable();
-            $table->foreignId('department_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('district_id')->nullable()->constrained()->nullOnDelete();
-            $table->boolean('is_active')->default(true);
+            $table->string('telefono', 30)->nullable();
+            $table->string('correo')->nullable();
+            $table->string('sitio_web')->nullable();
+            $table->string('ruta_logo')->nullable();
+            $table->text('direccion')->nullable();
+            $table->foreignId('departamento_id')->nullable()->constrained('departamentos')->nullOnDelete();
+            $table->foreignId('distrito_id')->nullable()->constrained('distritos')->nullOnDelete();
+            $table->boolean('activo')->default(true);
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('clinics');
+        Schema::dropIfExists('clinicas');
     }
 };

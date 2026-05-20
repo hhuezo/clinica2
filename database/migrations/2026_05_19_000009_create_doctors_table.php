@@ -8,32 +8,32 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('doctors', function (Blueprint $table) {
+        Schema::create('medicos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('specialty')->nullable();
-            $table->string('license_number', 50)->nullable();
-            $table->string('phone', 30)->nullable();
-            $table->text('bio')->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->foreignId('usuario_id')->constrained('users')->cascadeOnDelete();
+            $table->string('nombres');
+            $table->string('apellidos');
+            $table->string('especialidad')->nullable();
+            $table->string('numero_colegiado', 50)->nullable();
+            $table->string('telefono', 30)->nullable();
+            $table->text('biografia')->nullable();
+            $table->boolean('activo')->default(true);
             $table->timestamps();
         });
 
-        Schema::create('branch_doctor', function (Blueprint $table) {
+        Schema::create('medico_sucursal', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('branch_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('doctor_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('sucursal_id')->constrained('sucursales')->cascadeOnDelete();
+            $table->foreignId('medico_id')->constrained('medicos')->cascadeOnDelete();
             $table->timestamps();
 
-            $table->unique(['branch_id', 'doctor_id']);
+            $table->unique(['sucursal_id', 'medico_id']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('branch_doctor');
-        Schema::dropIfExists('doctors');
+        Schema::dropIfExists('medico_sucursal');
+        Schema::dropIfExists('medicos');
     }
 };

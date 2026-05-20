@@ -9,12 +9,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            CountrySeeder::class,
-            ElSalvadorGeoSeeder::class,
-            DocumentTypeSeeder::class,
-            KinshipSeeder::class,
-            RolePermissionSeeder::class,
-            AdminUserSeeder::class,
+            PaisSeeder::class,
+            DepartamentoSeeder::class,
+            DistritoSeeder::class,
+            TipoDocumentoSeeder::class,
+            ParentescoSeeder::class,
+            RolPermisoSeeder::class,
+            UsuariosRolesSeeder::class,
         ]);
     }
 }

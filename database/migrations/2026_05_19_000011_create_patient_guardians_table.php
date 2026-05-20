@@ -8,24 +8,24 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('patient_guardians', function (Blueprint $table) {
+        Schema::create('responsables_paciente', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('patient_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('kinship_id')->constrained();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->foreignId('document_type_id')->constrained();
-            $table->string('document_number', 50);
-            $table->string('phone', 30)->nullable();
-            $table->string('email')->nullable();
-            $table->text('address')->nullable();
-            $table->boolean('is_primary')->default(true);
+            $table->foreignId('paciente_id')->constrained('pacientes')->cascadeOnDelete();
+            $table->foreignId('parentesco_id')->constrained('parentescos');
+            $table->string('nombres');
+            $table->string('apellidos');
+            $table->foreignId('tipo_documento_id')->constrained('tipos_documento');
+            $table->string('numero_documento', 50);
+            $table->string('telefono', 30)->nullable();
+            $table->string('correo')->nullable();
+            $table->text('direccion')->nullable();
+            $table->boolean('es_principal')->default(true);
             $table->timestamps();
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('patient_guardians');
+        Schema::dropIfExists('responsables_paciente');
     }
 };

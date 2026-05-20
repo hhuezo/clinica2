@@ -8,20 +8,20 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('departments', function (Blueprint $table) {
+        Schema::create('departamentos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('country_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
-            $table->string('code', 10)->nullable();
-            $table->boolean('is_active')->default(true);
+            $table->foreignId('pais_id')->constrained('paises')->cascadeOnDelete();
+            $table->string('nombre');
+            $table->string('codigo', 10)->nullable();
+            $table->boolean('activo')->default(true);
             $table->timestamps();
 
-            $table->unique(['country_id', 'name']);
+            $table->unique(['pais_id', 'nombre']);
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('departments');
+        Schema::dropIfExists('departamentos');
     }
 };
