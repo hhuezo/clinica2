@@ -87,24 +87,24 @@
                 <ul class="slide-menu child1">
                     @can('empresas.gestionar')
                         <li class="slide">
-                            <a href="javascript:void(0);" id="empresasOption" class="side-menu__item">Empresas</a>
+                            <a href="{{ route('organizacion.empresas.index') }}" id="empresasOption" class="side-menu__item">Empresas</a>
                         </li>
                     @endcan
-                    @can('clinicas.ver')
+                    @canany(['clinicas.ver', 'clinicas.gestionar'])
                         <li class="slide">
-                            <a href="javascript:void(0);" id="clinicasOption" class="side-menu__item">Clínicas</a>
+                            <a href="{{ route('organizacion.clinicas.index') }}" id="clinicasOption" class="side-menu__item">Clínicas</a>
                         </li>
-                    @endcan
-                    @can('sucursales.ver')
+                    @endcanany
+                    @canany(['sucursales.ver', 'sucursales.gestionar'])
                         <li class="slide">
-                            <a href="javascript:void(0);" id="sucursalesOption" class="side-menu__item">Sucursales</a>
+                            <a href="{{ route('organizacion.sucursales.index') }}" id="sucursalesOption" class="side-menu__item">Sucursales</a>
                         </li>
-                    @endcan
-                    @can('medicos.ver')
+                    @endcanany
+                    @canany(['medicos.ver', 'medicos.gestionar'])
                         <li class="slide">
-                            <a href="javascript:void(0);" id="medicosOption" class="side-menu__item">Médicos</a>
+                            <a href="{{ route('organizacion.medicos.index') }}" id="medicosOption" class="side-menu__item">Médicos</a>
                         </li>
-                    @endcan
+                    @endcanany
                 </ul>
             </li>
         @endif
@@ -123,12 +123,15 @@
                 <ul class="slide-menu child1">
                     @can('usuarios.gestionar')
                         <li class="slide">
-                            <a href="javascript:void(0);" id="usuariosOption" class="side-menu__item">Usuarios</a>
+                            <a href="{{ route('seguridad.usuarios.index') }}" id="usuariosOption" class="side-menu__item">Usuarios</a>
                         </li>
                     @endcan
                     @can('roles.gestionar')
                         <li class="slide">
-                            <a href="javascript:void(0);" id="rolesOption" class="side-menu__item">Roles</a>
+                            <a href="{{ route('seguridad.roles.index') }}" id="rolesOption" class="side-menu__item">Roles</a>
+                        </li>
+                        <li class="slide">
+                            <a href="{{ route('seguridad.permisos.index') }}" id="permisosOption" class="side-menu__item">Permisos</a>
                         </li>
                     @endcan
                 </ul>

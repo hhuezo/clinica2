@@ -90,6 +90,12 @@
             opacity: 1;
         }
 
+        /* Drawers: mitad del ancho de la pantalla */
+        .offcanvas.offcanvas-end {
+            --bs-offcanvas-width: 50vw;
+            width: 50vw !important;
+            max-width: 50vw;
+        }
 
         /* The switch - the box around the slider */
         .switch {
