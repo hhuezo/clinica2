@@ -51,7 +51,7 @@ class SocialAuthController extends Controller
 
         Auth::login($user, remember: true);
 
-        return redirect()->intended('/dashboard');
+        return redirect()->intended(route('home', absolute: false));
     }
 
     protected function validateProvider(string $provider): void
